@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+<body>
+    <h1>Movie Recommender System</h1>
+    <h3>Welcome to Movie Recommender System</h3>
+    <h4>Please Select a Movie from the Following List</h4>
+    
+    <form action="" method="post">
+        <select name="selected_movie" class="form-select" aria-label="Default select example" required>
+            <option selected disabled>Select a movie</option>
+            {% for movie in movies %}
+                <option value="{{ movie }}">{{ movie }}</option>
+            {% endfor %}
+        </select>
+        
+        <br><br>
+        <button type="submit">Get Recommendation</button>
+    </form>
+
+    {% if selected %}
+        <h4>You selected: {{ selected }}</h4>
+        <h5>Recommended Movies:</h5>
+        <div>
+            {% for movie in recommended_movies %}
+                <div style="display: inline-block; margin-right: 20px; text-align: center;">
+                    <img src="{{ movie.poster }}" alt="{{ movie.name }}" style="width: 150px;">
+                    <p>{{ movie.name }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+</body>
+</html>
